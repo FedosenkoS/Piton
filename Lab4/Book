@@ -1,0 +1,120 @@
+# Kласс Book: id, Название, Автор (ы), Издательство, Год издания, Количество страниц, Цена,
+# Тип переплета.
+# Функции-члены реализуют запись и считывание полей (проверка корректности).
+# Создать список объектов. Вывести:
+# a)	список книг заданного автора;
+# б) список книг, выпущенных после заданного года.
+import random
+
+
+class Book:
+
+    __count=0
+
+
+    def __init__(self, Name, Autor, Publish_house, Year, Number_page, Cost, binding_type):
+        self.__id_book=random.randint(1, 1000)
+        self.__Name=Name
+        self.__Autor=Autor
+        self.__Publish_house = Publish_house
+        self.Year = Year
+        self.Number_page = Number_page
+        self.Cost = Cost
+        self.binding_type = binding_type
+        Book.__count+=1
+
+    def __del__(self):
+        Book.__count+=1
+
+
+    def get_Name(self):
+        return self.__Name
+
+    def get_Autor(self):
+        return self.__Autor
+
+    def get_Publish_house(self):
+        return self.__Publish_house
+
+    def set_Name(self, Name):
+       self.__Name = Name
+
+    def set_Autor(self, Autor):
+        self.__Autor = Autor
+
+    def set_Publish_house(self, Publish_house):
+        self.__Publish_house = Publish_house
+
+    def __str__(self):
+        return self.__Name + " " + self.__Autor + " id-" + str(self.__id_book) + "\n"
+
+    @classmethod
+    def get_count_book(cls):
+        return cls.__count
+
+# обычный метод
+
+    def price_category(self):
+        if self.Cost > 100:
+            print("Высокая стоимость")
+        elif self.Cost > 50:
+            print("Средняя стоимость")
+        else:
+            print("Низкая стоимость")
+
+
+    @staticmethod
+    def century(Year):
+        if Year > 2000:
+            return "издан в XXI веке"
+        else:
+            return "издан в XX веке"
+
+    # a)	список книг заданного автора;
+
+def book_author(author):
+
+    for book in books:
+        if book.get_Autor() == author:
+            print(f"{book.get_Name()}, {book.get_Autor()}, {book.get_Publish_house()}")
+
+def book_year(year):
+
+    for book in books:
+        if book.Year >= year:
+            print(f"{book.get_Name()}, {book.get_Autor()}, {book.Year}")
+
+
+
+
+Book1=Book('Лето', 'Иванов С.А.', 'Издание 1', 2020, 467, 50, 'мягкий')
+Book2=Book('Дождь', 'Петров И.В.', 'Издание 2', 2012, 250, 45, 'мягкий')
+Book3=Book('Сегодня весело', 'Иванов С.А.', 'Издание 1', 2022, 65, 59, 'твердый')
+Book4=Book('Воскресенье', 'Сидоров К.К.', 'Издание 3', 1998, 145, 78, 'мягкий')
+Book5=Book('Дуб', 'Иванов С.А.', 'Издание 2', 2010, 675, 145, 'твердый')
+
+books=[Book1, Book2, Book3, Book4, Book5]
+
+#Применение get И set
+print("Вывод информации о книге Book2:")
+print(Book2)
+print("Изменим автора " + Book2.get_Autor()+ " на Сидорова К.К."+"\n")
+Book2.set_Autor("Сидоров К.К.")
+print("Повторный вывод информации о книге Book2:")
+print(Book2)
+
+print("Применение метода класса для получения количества книг в базе: " + str(Book.get_count_book()) + "\n")
+
+print("Применение обычного метода для определения ценовой категории Book3")
+Book3.price_category()
+
+print("\nПрименение статического метода для определения столетия издания"+"\n")
+for book in books:
+    print(f"{book.get_Name()},{book.get_Autor()},{Book.century(book.Year)}")
+
+
+print("\n Выборка книг по автору Иванову С.А.:\n")
+book_author('Иванов С.А.')
+
+print("\n Выборка книг изданных с 2010:\n")
+book_year(2010)
