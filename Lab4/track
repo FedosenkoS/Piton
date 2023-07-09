@@ -1,1 +1,37 @@
+class Track:
 
+    def __init__(self, mass):
+        self.max_mass = mass
+        self.tb=[]
+
+    def addTB(self, m):
+        self.tb.append(Table(m))
+
+    def loading_capacity(self):
+        count=0
+        new_max_mass=self.max_mass
+        for i in self.tb:
+            if (new_max_mass-i.mass) > 0:
+                new_max_mass-=i.mass
+                count +=1
+                print(f"Загружен стол № {count} массой {i.mass}. Можно загрузить {new_max_mass}" )
+        print(f"Больше не вмещается. Количество загруженных столов  {count}. Осталось свободной массы {new_max_mass}" )
+
+    # def __str__(self):
+    #     return str()
+
+class Table:
+    def __init__(self, m):
+        self.mass = m
+
+
+
+tr = Track(50)
+print(tr.max_mass)
+tr.addTB(5)
+tr.addTB(10)
+tr.addTB(25)
+tr.addTB(5)
+tr.addTB(10)
+tr.addTB(15)
+tr.loading_capacity()
