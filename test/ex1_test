@@ -1,0 +1,36 @@
+import unittest
+import ex1
+
+
+class MyTestEx1(unittest.TestCase):
+    """"Ex1 Test"""
+
+    @classmethod
+    def setUpClass(cls):
+        """"Set up for class"""
+        print("setUpClass")
+        print("==========")
+
+    @classmethod
+    def tearDownClass(cls):
+        """"Tear down for class"""
+        print("==========")
+        print("tearDownClass")
+
+    def setUp(self):
+        """"Set up for test"""
+        print("Set up for [" + self.shortDescription()+"]")
+
+    def tearDown(self):
+        """"Tear down for test"""
+        print("Tear down for [" + self.shortDescription()+"]")
+        print("")
+
+    def test_ex1(self):
+        """"Поиск суперпростого числа"""
+        print("id: " + self.id() )
+        self.assertEqual(ex1.ex1(99),[11, 13, 17, 31, 37, 71, 73, 79, 97])
+
+
+if __name__ == '__main__':
+    unittest.main()
