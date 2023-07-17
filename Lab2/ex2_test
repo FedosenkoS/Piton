@@ -1,0 +1,56 @@
+import unittest
+import ex2
+
+
+class MyTestEx1(unittest.TestCase):
+    """"Ex1 Test"""
+
+    @classmethod
+    def setUpClass(cls):
+        """"Set up for class"""
+        print("setUpClass")
+        print("==========")
+
+    @classmethod
+    def tearDownClass(cls):
+        """"Tear down for class"""
+        print("==========")
+        print("tearDownClass")
+
+    def setUp(self):
+        """"Set up for test"""
+        print("Set up for [" + self.shortDescription()+"]")
+
+    def tearDown(self):
+        """"Tear down for test"""
+        print("Tear down for [" + self.shortDescription()+"]")
+        print("")
+
+    def test_get_distance(self):
+        """"Расчет дистанции"""
+        print("id: " + self.id() )
+        self.assertEqual(ex2.get_distance((2, 3, 6), (5, 7, 1)),7.0710678118654755)
+
+    def test_distance_in_metr(self):
+        """"Перевод в метры"""
+        print("id: " + self.id() )
+        self.assertEqual(ex2.distance_in_metr(49),49000)
+
+#Проверка на ошибку (правильное значение 3.0668463611859837)
+    def test_distance_in_mile(self):
+        """"Перевод в мили"""
+        print("id: " + self.id() )
+        self.assertEqual(ex2.distance_in_mile(5689),3.0668463611859837)
+
+    def test_calc_for_men_1(self):
+        """"Проверка преодоления пути человеком за 8 часов"""
+        print("id: " + self.id() )
+        self.assertTrue(ex2.calc_for_men(20, 5))
+
+    def test_calc_for_men_2(self):
+        """"Проверка непреодоления пути человеком за 8 часов"""
+        print("id: " + self.id() )
+        self.assertFalse(ex2.calc_for_men(100, 5))
+
+if __name__ == '__main__':
+    unittest.main()
